@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: address-microservice
+
+  profiles:
+    active: ${SCOPE:stage}
