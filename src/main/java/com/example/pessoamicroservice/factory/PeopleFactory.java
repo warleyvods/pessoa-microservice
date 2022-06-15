@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.controller.factory;
+package com.example.pessoamicroservice.factory;
 
 import com.example.pessoamicroservice.client.AddressClient;
 import com.example.pessoamicroservice.client.dto.AddressResponseDTO;

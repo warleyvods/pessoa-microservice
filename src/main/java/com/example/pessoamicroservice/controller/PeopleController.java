@@ -1,6 +1,6 @@
 package com.example.pessoamicroservice.controller;
 
-import com.example.pessoamicroservice.controller.factory.PeopleFactory;
+import com.example.pessoamicroservice.factory.PeopleFactory;
 import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.mapper.PeopleMapper;
