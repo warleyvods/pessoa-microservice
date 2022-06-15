@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.controller.mapper;
+package com.example.pessoamicroservice.mapper;
 
 import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;

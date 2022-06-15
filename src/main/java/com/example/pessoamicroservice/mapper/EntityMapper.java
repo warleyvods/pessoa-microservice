@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.controller.mapper;
+package com.example.pessoamicroservice.mapper;
 
 import java.util.List;
 
