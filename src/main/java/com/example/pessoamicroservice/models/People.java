@@ -21,5 +21,4 @@ public class People {
     private String cpf;
     private Integer idade;
 
-
 }

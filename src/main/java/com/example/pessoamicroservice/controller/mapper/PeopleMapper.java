@@ -1,7 +1,7 @@
-package com.example.pessoamicroservice.mapper;
+package com.example.pessoamicroservice.controller.mapper;
 
-import com.example.pessoamicroservice.dtos.PeopleRequestDTO;
-import com.example.pessoamicroservice.dtos.PeopleResponseDTO;
+import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
+import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.models.People;
 import org.mapstruct.Mapper;
 

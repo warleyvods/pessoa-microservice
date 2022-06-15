@@ -29,5 +29,4 @@ public class PeopleService {
     public List<People> findAll() {
         return repository.findAll();
     }
-
 }

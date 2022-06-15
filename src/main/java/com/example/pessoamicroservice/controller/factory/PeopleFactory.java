@@ -2,7 +2,7 @@ package com.example.pessoamicroservice.controller.factory;
 
 import com.example.pessoamicroservice.client.AddressClient;
 import com.example.pessoamicroservice.client.dto.AddressResponseDTO;
-import com.example.pessoamicroservice.dtos.PeopleResponseDTO;
+import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.service.PeopleService;
 import lombok.RequiredArgsConstructor;

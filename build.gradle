@@ -28,14 +28,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 
     compileOnly 'org.projectlombok:lombok'
+
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
+
     annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor('org.projectlombok:lombok-mapstruct-binding:0.2.0')
-    annotationProcessor('org.mapstruct:mapstruct-processor:1.4.2.Final')
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

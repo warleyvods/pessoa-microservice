@@ -1,9 +1,9 @@
 package com.example.pessoamicroservice.controller;
 
 import com.example.pessoamicroservice.controller.factory.PeopleFactory;
-import com.example.pessoamicroservice.dtos.PeopleRequestDTO;
-import com.example.pessoamicroservice.dtos.PeopleResponseDTO;
-import com.example.pessoamicroservice.mapper.PeopleMapper;
+import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
+import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
+import com.example.pessoamicroservice.controller.mapper.PeopleMapper;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.service.PeopleService;
 import org.springframework.http.HttpStatus;
