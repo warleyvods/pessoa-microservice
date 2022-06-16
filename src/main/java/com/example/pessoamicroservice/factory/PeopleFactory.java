@@ -12,10 +12,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class PeopleFactory {
-
-    private final PeopleService peopleService;
-    private final AddressClient addressClient;
+public record PeopleFactory(PeopleService peopleService, AddressClient addressClient) {
 
     public PeopleResponseDTO response(Long id) {
         final People people = peopleService.findById(id);

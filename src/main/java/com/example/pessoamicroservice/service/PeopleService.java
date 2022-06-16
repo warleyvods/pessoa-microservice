@@ -1,5 +1,6 @@
 package com.example.pessoamicroservice.service;
 
+import com.example.pessoamicroservice.exceptions.PeopleNotFoundException;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.repository.PeopleRepository;
 import org.springframework.stereotype.Service;
@@ -7,12 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PeopleService {
-    private final PeopleRepository repository;
-
-    public PeopleService(PeopleRepository repository) {
-        this.repository = repository;
-    }
+public record PeopleService(PeopleRepository repository) {
 
     public People save(People people) {
         return repository.save(people);
@@ -23,7 +19,7 @@ public class PeopleService {
     }
 
     public People findById(Long id) {
-        return repository.findById(id).orElseThrow(NullPointerException::new);
+        return repository.findById(id).orElseThrow(() -> new PeopleNotFoundException("People not found!"));
     }
 
     public List<People> findAll() {
