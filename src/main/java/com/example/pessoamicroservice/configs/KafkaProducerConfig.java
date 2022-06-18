@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.producer;
+package com.example.pessoamicroservice.configs;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
