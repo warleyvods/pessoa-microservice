@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.factory;
+package com.example.pessoamicroservice.usecases;
 
 import com.example.pessoamicroservice.client.AddressClient;
 import com.example.pessoamicroservice.client.dto.AddressResponseDTO;
@@ -12,12 +12,19 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public record PeopleFactory(PeopleService peopleService, AddressClient addressClient) {
+public class FindByPeopleUsecase {
+
+    private final PeopleService peopleService;
+    private final AddressClient addressClient;
 
     public PeopleResponseDTO response(Long id) {
         final People people = peopleService.findById(id);
-        final List<AddressResponseDTO> addressFromClient = addressClient.getAddressFromClient(id);
+        final List<AddressResponseDTO> addressFromClient = getAddressResponseDTOS(id);
 
         return new PeopleResponseDTO(id, people.getName(), people.getCpf(), people.getIdade(), addressFromClient);
+    }
+
+    public List<AddressResponseDTO> getAddressResponseDTOS(Long id) {
+        return addressClient.getAddressFromClient(id);
     }
 }

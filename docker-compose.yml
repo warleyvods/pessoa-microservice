@@ -1,0 +1,82 @@
+version: '3.4'
+services:
+
+  nginx:
+    image: warleyvods/nginx-microservices
+    hostname: nginx
+    restart: always
+    networks:
+      - microservices
+    ports:
+      - "80:80"
+
+  pessoa:
+    image: warleyvods/pessoa-m
+    hostname: pessoa
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - microservices
+    links:
+      - db
+    
+  db:
+    image: postgres:10-alpine
+    container_name: postgres
+    hostname: db
+    restart: always
+    networks:
+      - microservices
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=banco
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  address:
+    image: warleyvods/address-m
+    hostname: address
+    restart: always
+    depends_on:
+      - db2
+    networks:
+      - microservices
+    links:
+      - db2
+
+  db2:
+    image: mysql:8.0.26
+    container_name: mysql
+    hostname: db2
+    networks:
+      - microservices
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: banco
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+    - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+    - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+
+networks:
+  microservices:
+    driver: bridge

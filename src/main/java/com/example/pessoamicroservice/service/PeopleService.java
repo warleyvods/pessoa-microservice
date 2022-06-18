@@ -3,12 +3,16 @@ package com.example.pessoamicroservice.service;
 import com.example.pessoamicroservice.exceptions.PeopleNotFoundException;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.repository.PeopleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public record PeopleService(PeopleRepository repository) {
+@RequiredArgsConstructor
+public class PeopleService {
+
+    private final PeopleRepository repository;
 
     public People save(People people) {
         return repository.save(people);
