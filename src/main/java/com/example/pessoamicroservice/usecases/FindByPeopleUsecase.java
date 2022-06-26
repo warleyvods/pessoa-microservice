@@ -3,11 +3,10 @@ package com.example.pessoamicroservice.usecases;
 import com.example.pessoamicroservice.client.AddressClient;
 import com.example.pessoamicroservice.client.dto.AddressResponseDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
-import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.gateway.PeopleGateway;
+import com.example.pessoamicroservice.models.People;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

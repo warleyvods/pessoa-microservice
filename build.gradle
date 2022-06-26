@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'jacoco'
 }
 
 
@@ -60,4 +61,31 @@ tasks.named('test') {
 
 bootJar {
     archiveName = 'pessoa.jar'
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+
+        xml.destination file("${buildDir}/reports/jacoco.xml")
+        html.destination file("${buildDir}/reports/coverage")
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/PessoaMicroserviceApplication**",
+                    "com/example/pessoamicroservice/client/**",
+                    "com/example/pessoamicroservice/configs/**",
+                    "com/example/pessoamicroservice/mapper/**",
+                    "com/example/pessoamicroservice/models/**",
+                    "com/example/pessoamicroservice/controller/dtos/**",
+                    "com/example/pessoamicroservice/exceptions/handler/ExceptionFilters**",
+            ])
+        }))
+    }
 }

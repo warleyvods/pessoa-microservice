@@ -1,0 +1,21 @@
+name: PeopleMicroService
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v2
+      - name: Set up JDK 17
+        with:
+          java-version: 17
+          distribuition: 'adopt'
+          cache: gradle
+
+      - name: Build with Gradle
+        run: ./gradlew compileJava
+
+      - name: Running test
+        run: ./gradlew test
