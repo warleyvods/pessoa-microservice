@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Say Hello Mona it's Monday"
-      run: echo "Hoje $GIT_LOGIN"
+        run: echo "Hoje $GIT_LOGIN"
 
       - uses: actions/checkout@v2
       - name: Set up JDK 17
