@@ -1,4 +1,4 @@
-Um Simples crud com relacionamento utilizando o conceito de microserviços.
+Um simples crud com relacionamento utilizando o conceito de microserviços.
 
 
 POST: /api/people
