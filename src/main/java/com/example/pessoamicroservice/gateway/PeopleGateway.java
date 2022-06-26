@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.service;
+package com.example.pessoamicroservice.gateway;
 
 import com.example.pessoamicroservice.exceptions.PeopleNotFoundException;
 import com.example.pessoamicroservice.models.People;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PeopleService {
+public class PeopleGateway {
 
     private final PeopleRepository repository;
 

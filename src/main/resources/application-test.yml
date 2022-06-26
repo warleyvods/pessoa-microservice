@@ -21,7 +21,7 @@ spring:
 
 microservice:
   address:
-    url: "http://localhost:8082/api/address"
+    url: "http://localhost:9999/api/address"
 
 logging:
   level:

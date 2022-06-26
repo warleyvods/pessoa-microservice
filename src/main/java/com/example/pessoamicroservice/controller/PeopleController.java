@@ -6,7 +6,7 @@ import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.mapper.PeopleMapper;
 import com.example.pessoamicroservice.models.People;
-import com.example.pessoamicroservice.service.PeopleService;
+import com.example.pessoamicroservice.gateway.PeopleGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/people")
 @RestController
 public class PeopleController {
-    private final PeopleService peopleService;
+    private final PeopleGateway peopleGateway;
     private final PeopleMapper peopleMapper;
     private final FindByPeopleUsecase findByPeopleUsecase;
     private final DeletePeopleUsecase deletePeopleUsecase;
@@ -26,7 +26,7 @@ public class PeopleController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public PeopleResponseDTO save(@RequestBody @Valid PeopleRequestDTO peopleRequestDTO) {
-        People people = peopleService.save(peopleMapper.toDomain(peopleRequestDTO));
+        People people = peopleGateway.save(peopleMapper.toDomain(peopleRequestDTO));
         return peopleMapper.fromDomain(people);
     }
 
@@ -45,6 +45,6 @@ public class PeopleController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<PeopleResponseDTO> listAll() {
-        return peopleMapper.fromDomainList(peopleService.findAll());
+        return peopleMapper.fromDomainList(peopleGateway.findAll());
     }
 }
