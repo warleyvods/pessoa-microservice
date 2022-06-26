@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.gateway;
+package com.example.pessoamicroservice.gateways;
 
 import com.example.pessoamicroservice.exceptions.PeopleNotFoundException;
 import com.example.pessoamicroservice.models.People;

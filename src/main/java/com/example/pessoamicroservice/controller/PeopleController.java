@@ -6,7 +6,7 @@ import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.mapper.PeopleMapper;
 import com.example.pessoamicroservice.models.People;
-import com.example.pessoamicroservice.gateway.PeopleGateway;
+import com.example.pessoamicroservice.gateways.PeopleGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

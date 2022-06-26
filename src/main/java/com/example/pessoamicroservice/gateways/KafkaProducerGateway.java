@@ -1,4 +1,4 @@
-package com.example.pessoamicroservice.gateway;
+package com.example.pessoamicroservice.gateways;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;

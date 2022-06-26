@@ -3,7 +3,7 @@ package com.example.pessoamicroservice.usecases;
 import com.example.pessoamicroservice.client.AddressClient;
 import com.example.pessoamicroservice.client.dto.AddressResponseDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
-import com.example.pessoamicroservice.gateway.PeopleGateway;
+import com.example.pessoamicroservice.gateways.PeopleGateway;
 import com.example.pessoamicroservice.models.People;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

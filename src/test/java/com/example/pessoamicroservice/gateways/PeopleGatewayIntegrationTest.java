@@ -1,30 +1,32 @@
-package com.example.pessoamicroservice.gateway;
+package com.example.pessoamicroservice.gateways;
 
 import com.example.pessoamicroservice.exceptions.PeopleNotFoundException;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.repository.PeopleRepository;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-class PeopleGatewayUnitTest {
+@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class PeopleGatewayIntegrationTest {
 
-    @InjectMocks
+    @Autowired
     private PeopleGateway peopleGateway;
 
-    @Mock
+    @Autowired
     private PeopleRepository peopleRepository;
+
+    @BeforeEach
+    void setUp() {
+        peopleRepository.deleteAll();
+    }
 
     @Test
     void shouldSavePeopleWhitoutError() {
@@ -33,50 +35,44 @@ class PeopleGatewayUnitTest {
         people.setIdade(19);
         people.setName("Warley");
 
-        when(peopleRepository.save(people)).thenReturn(people);
-
         final People response = peopleGateway.save(people);
 
         assertEquals(people.getCpf(), response.getCpf());
         assertEquals(people.getId(), response.getId());
         assertEquals(people.getName(), response.getName());
-
-        verify(peopleRepository).save(people);
     }
 
     @Test
     void shouldDeleteById() {
-        doNothing().when(peopleRepository).deleteById(anyLong());
-
-        peopleGateway.deleteById(anyLong());
-
-        verify(peopleRepository, times(1)).deleteById(anyLong());
-    }
-
-    @Test
-    void shouldFindById() {
         People people = new People();
         people.setCpf("03964879126");
         people.setIdade(19);
         people.setName("Warley");
 
-        when(peopleRepository.findById(anyLong())).thenReturn(Optional.of(people));
+        final People response = peopleGateway.save(people);
+        peopleGateway.deleteById(response.getId());
 
-        final People response = peopleGateway.findById(anyLong());
+        assertThrows(PeopleNotFoundException.class, () -> peopleGateway.findById(response.getId()));
+    }
 
-        assertEquals(people.getCpf(), response.getCpf());
+    @Test
+    void shouldFindById() {
+        People people = new People();
+        people.setCpf("123456789");
+        people.setIdade(19);
+        people.setName("Warley");
+
+        final People savedPeople = peopleGateway.save(people);
+        final People response = peopleGateway.findById(savedPeople.getId());
+
+        assertEquals("123456789", response.getCpf());
         assertEquals(people.getId(), response.getId());
         assertEquals(people.getName(), response.getName());
     }
 
-    @Disabled
     @Test
     void shouldNotFindById() {
-        when(peopleRepository.findById(anyLong())).thenThrow(PeopleNotFoundException.class);
-
-        peopleGateway.findById(anyLong());
-
-        verify(peopleRepository, times(0)).findById(anyLong());
+        assertThrows(PeopleNotFoundException.class, () -> peopleGateway.findById(99L));
     }
 
     @Test
@@ -90,8 +86,7 @@ class PeopleGatewayUnitTest {
         people1.setCpf("123456789");
         people1.setIdade(19);
         people1.setName("Warley");
-
-        when(peopleRepository.findAll()).thenReturn(List.of(people0, people1));
+        peopleRepository.saveAll(List.of(people0, people1));
 
         final List<People> listPeople = peopleGateway.findAll();
 

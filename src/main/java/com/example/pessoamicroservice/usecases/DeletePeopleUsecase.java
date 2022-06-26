@@ -1,7 +1,7 @@
 package com.example.pessoamicroservice.usecases;
 
-import com.example.pessoamicroservice.gateway.KafkaProducerGateway;
-import com.example.pessoamicroservice.gateway.PeopleGateway;
+import com.example.pessoamicroservice.gateways.KafkaProducerGateway;
+import com.example.pessoamicroservice.gateways.PeopleGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
