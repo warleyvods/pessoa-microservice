@@ -11,7 +11,7 @@ spring:
     active: ${SCOPE:stage}
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA:localhost:9092}
 
 feign:
   circuitbreaker:
