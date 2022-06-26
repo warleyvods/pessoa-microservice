@@ -18,6 +18,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew compileJava
 
+      - name: Create Jar
+        run: ./gradlew assemble
+
       - name: Running test
         run: ./gradlew test
 
