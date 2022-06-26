@@ -5,6 +5,8 @@ on:
 env:
   GIT_LOGIN: ${{ secrets.GIT_LOGIN }}
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+  NEXUS_LOGIN: ${{ secrets.NEXUS_LOGIN }}
+  NEXUS_PASS: ${{ secrets.NEXUS_PASS }}
 
 jobs:
   Build:
@@ -46,6 +48,6 @@ jobs:
       - name: Publish package
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
-          arguments: publish --stacktrace
+          arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
