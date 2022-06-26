@@ -1,9 +1,8 @@
 Um Simples crud com relacionamento utilizando o conceito de microserviços.
 
 
+POST: /api/people
 ```
-POST: Save People
-
 {
     "name": "Warley",
     "cpf": "036541657",
@@ -14,4 +13,13 @@ POST: Save People
 ```mermaid
 graph TD;
     PeopleMS-->PeopleDB;
+```
+
+GET: /api/people/1
+
+```mermaid
+graph TD;
+    PeopleMS-->PeopleDB;
+    PeopleMS-->AddressMS
+    AddressMS-->AddressDB
 ```
