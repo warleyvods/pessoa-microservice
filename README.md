@@ -22,4 +22,7 @@ graph TD;
     PeopleMS-->PeopleDB;
     PeopleMS-->AddressMS
     AddressMS-->AddressDB
+    AddressDB-->AddressMS
+    AddressMS-->CachePeople
+    CachePeople-->PeopleMS
 ```
