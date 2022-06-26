@@ -26,3 +26,16 @@ graph TD;
     AddressMS-->CachePeople
     CachePeople-->PeopleMS
 ```
+
+DELETE: /api/people/1
+
+```mermaid
+graph TD;
+    PeopleMS-->PeopleDB;
+    PeopleMS-->KafkaTopic
+    KafkaTopic-->KafkaConsumer
+    KafkaConsumer-->AddressMS
+    AddressMS-->AddressDB
+    AddressDB-->AddressMS
+    AddressMS-->PeopleMS
+```
