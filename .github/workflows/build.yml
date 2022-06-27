@@ -41,12 +41,12 @@ jobs:
 #          version-file: ${{ env.VERSION_FILE }}
 #          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
-      - name: Release with Gradle
-        id: release
-        run: |
-          ./gradlew release -Prelease.useAutomaticVersion=true \
-          -Prelease.releaseVersion=${{ env.RELEASE_VERSION }} \
-          -Prelease.newVersion=${{ env.NEXT_VERSION }}
+#      - name: Release with Gradle
+#        id: release
+#        run: |
+#          ./gradlew release -Prelease.useAutomaticVersion=true \
+#          -Prelease.releaseVersion=${{ env.RELEASE_VERSION }} \
+#          -Prelease.newVersion=${{ env.NEXT_VERSION }}
 
       #Verify integrity
       - name: Build with Gradle
