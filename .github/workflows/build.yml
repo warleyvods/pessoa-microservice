@@ -2,19 +2,23 @@ name: PeopleMicroService
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+
 env:
   GIT_LOGIN: ${{ secrets.GIT_LOGIN }}
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
   NEXUS_LOGIN: ${{ secrets.NEXUS_LOGIN }}
   NEXUS_PASS: ${{ secrets.NEXUS_PASS }}
+  VERSION_FILE: build.gradle
+  VERSION_EXTRACT_PATTERN: '\d'
 
 jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - name: "Say Hello Mona it's Monday"
-        run: echo "Hoje $GIT_LOGIN"
-
+      #Prepare
       - uses: actions/checkout@v2
       - name: Set up JDK 17
         uses: actions/setup-java@v2
@@ -23,15 +27,40 @@ jobs:
           distribution: 'adopt'
           cache: gradle
 
+      - name: Setup git credentials
+        run: |
+          git config user.name 'Warley Vinicius'
+          git config user.email 'warleyvods@gmail.com'
+          git config user.password ${{ secrets.GIT_TOKEN }}
+
+      #Versioning
+      - name: Generate versions
+        uses: HardNorth/github-version-generate@v1.1.1
+        with:
+          version-source: file
+          version-file: ${{ env.VERSION_FILE }}
+          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
+
+      - name: Release with Gradle
+        id: release
+        run: |
+          ./gradlew release -Prelease.useAutomaticVersion=true \
+          -Prelease.releaseVersion=${{ env.RELEASE_VERSION }} \
+          -Prelease.newVersion=${{ env.NEXT_VERSION }}
+
+      #Verify integrity
       - name: Build with Gradle
         run: ./gradlew compileJava
 
+      #Create a Jar file
       - name: Create Jar
         run: ./gradlew assemble
 
+      #Running tests
       - name: Running test
         run: ./gradlew test
 
+      #Login dockerhub
       - name: Docker login and push
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -39,26 +68,15 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
+      #Build docker image
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag warleyvods/pessoa-m
 
+      #Pushing to dockerhub
       - name: Docker Push
         run: docker push warleyvods/pessoa-m
 
-      - name: Semantic Versioning
-        id: version
-        uses: paulhatch/semantic-version@v4.0.2
-        with:
-          tag_prefix: "v"
-          major_pattern: "(MAJOR)"
-          minor_pattern: "(MINOR)"
-          format: "${major}.${minor}.${patch}-prerelease${increment}"
-          change_path: "src/my-service"
-          namespace: people-ms
-          bump_each_commit: false
-          search_commit_body: false
-          user_format_type: "csv"
-
+      #Publish a package to Artifact registrys
       - name: Publish package
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
