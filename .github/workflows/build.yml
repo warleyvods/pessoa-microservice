@@ -34,12 +34,12 @@ jobs:
           git config user.password ${{ secrets.GIT_TOKEN }}
 
       #Versioning
-      - name: Generate versions
-        uses: HardNorth/github-version-generate@v1.1.1
-        with:
-          version-source: file
-          version-file: ${{ env.VERSION_FILE }}
-          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
+#      - name: Generate versions
+#        uses: HardNorth/github-version-generate@v1.1.1
+#        with:
+#          version-source: file
+#          version-file: ${{ env.VERSION_FILE }}
+#          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
       - name: Release with Gradle
         id: release
