@@ -11,7 +11,7 @@ import java.util.List;
 public class AddressClientFallback implements AddressClient {
 
     @Override
-    public List<AddressResponseDTO> getAddressFromClient(Long id) {
+    public List<AddressResponseDTO> getAddressFromClient(final Long id) {
         log.info("fallback client");
         return List.of();
     }

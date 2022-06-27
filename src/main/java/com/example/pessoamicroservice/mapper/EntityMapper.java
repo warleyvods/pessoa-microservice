@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface EntityMapper<E, T, D> {
 
-    E toDomain(T requestDTO);
+    E toDomain(final T requestDTO);
 
-    D fromDomain(E entity);
+    D fromDomain(final E entity);
 
-    List<D> fromDomainList(List<E> entityList);
+    List<D> fromDomainList(final List<E> entityList);
 }

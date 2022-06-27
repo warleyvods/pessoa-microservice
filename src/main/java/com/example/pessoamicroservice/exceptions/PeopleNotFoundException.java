@@ -1,8 +1,7 @@
 package com.example.pessoamicroservice.exceptions;
 
-
-public class PeopleNotFoundException extends RuntimeException{
-    public PeopleNotFoundException(String msg) {
+public class PeopleNotFoundException extends RuntimeException {
+    public PeopleNotFoundException(final String msg) {
         super(msg);
     }
 }

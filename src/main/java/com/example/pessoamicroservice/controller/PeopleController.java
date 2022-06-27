@@ -25,20 +25,20 @@ public class PeopleController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PeopleResponseDTO save(@RequestBody @Valid PeopleRequestDTO peopleRequestDTO) {
-        People people = peopleGateway.save(peopleMapper.toDomain(peopleRequestDTO));
+    public PeopleResponseDTO save(@RequestBody @Valid final PeopleRequestDTO peopleRequestDTO) {
+        final People people = peopleGateway.save(peopleMapper.toDomain(peopleRequestDTO));
         return peopleMapper.fromDomain(people);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
-    public PeopleResponseDTO findById(@PathVariable Long id) {
+    public PeopleResponseDTO findById(@PathVariable final Long id) {
         return findByPeopleUsecase.response(id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable final Long id) {
         deletePeopleUsecase.deleteById(id);
     }
 

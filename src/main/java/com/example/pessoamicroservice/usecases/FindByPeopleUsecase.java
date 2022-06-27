@@ -5,7 +5,6 @@ import com.example.pessoamicroservice.client.dto.AddressResponseDTO;
 import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.gateways.PeopleGateway;
 import com.example.pessoamicroservice.models.People;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +12,8 @@ import java.util.List;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
-public class FindByPeopleUsecase {
-
-    private final PeopleGateway peopleGateway;
-    private final AddressClient addressClient;
+public record FindByPeopleUsecase(PeopleGateway peopleGateway,
+                                  AddressClient addressClient) {
 
     public PeopleResponseDTO response(Long id) {
         final People people = peopleGateway.findById(id);

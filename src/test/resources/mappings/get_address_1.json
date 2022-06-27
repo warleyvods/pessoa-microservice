@@ -8,16 +8,18 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "jsonBody": {
-      "id": 90,
-      "street": "Rua C-299",
-      "complement": "QD 36 LT 18",
-      "number": "517",
-      "zipCode": "74565640",
-      "district": "Setor Bueno",
-      "state": "Goias",
-      "country": "Brasil",
-      "city": "Goiania"
-    }
+    "jsonBody": [
+      {
+        "id": 1,
+        "street": "Rua C-299",
+        "complement": "QD 36 LT 18",
+        "number": "517",
+        "zipCode": "74565640",
+        "district": "Setor Bueno",
+        "state": "Goias",
+        "country": "Brasil",
+        "city": "Goiania"
+      }
+    ]
   }
 }

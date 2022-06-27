@@ -4,7 +4,6 @@ import com.example.pessoamicroservice.controller.dtos.PeopleResponseDTO;
 import com.example.pessoamicroservice.exceptions.handler.ExceptionFilters;
 import com.example.pessoamicroservice.models.People;
 import com.example.pessoamicroservice.repository.PeopleRepository;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -82,12 +81,30 @@ class PeopleControllerTest {
         final var response = testRestTemplate.exchange("/api/people", HttpMethod.POST, request, ExceptionFilters.class);
 
         assertEquals(400, response.getStatusCodeValue());
-        assertEquals("Argument not valid", Objects.requireNonNull(response.getBody()).getTitle());
+        assertEquals("Argument not valid", Objects.requireNonNull(response.getBody()).title());
     }
 
     @Test
-    void shouldFindById() {
+    void shouldFindByIdWithOneAddress() {
         People people = new People();
+        people.setCpf("02312341654");
+        people.setIdade(10);
+        people.setName("Warley");
+        final Long peopleSavedId = peopleRepository.save(people).getId();
+
+        final ResponseEntity<PeopleResponseDTO> response = testRestTemplate.exchange("/api/people/" + peopleSavedId, HttpMethod.GET, null, PeopleResponseDTO.class);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(people.getCpf(), Objects.requireNonNull(response.getBody()).cpf());
+        assertEquals(people.getIdade(), response.getBody().idade());
+        assertEquals(people.getName(), response.getBody().name());
+        assertEquals(0, response.getBody().address().size());
+    }
+
+    @Test
+    void shouldFindByIdWithFallback() {
+        People people = new People();
+        people.setId(2L);
         people.setCpf("02312341654");
         people.setIdade(10);
         people.setName("Warley");
@@ -147,7 +164,7 @@ class PeopleControllerTest {
 
         final var listPeople = testRestTemplate.exchange("/api/people", HttpMethod.GET, null, new ParameterizedTypeReference<List<PeopleResponseDTO>>() {});
 
-        assertEquals(2, listPeople.getBody().size());
+        assertEquals(2, Objects.requireNonNull(listPeople.getBody()).size());
 
         assertEquals(people0.getCpf(), listPeople.getBody().get(0).cpf());
         assertEquals(people0.getIdade(), listPeople.getBody().get(0).idade());

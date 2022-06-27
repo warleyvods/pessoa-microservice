@@ -17,25 +17,23 @@ public class RestExceptionHandler {
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(PeopleNotFoundException.class)
     public ExceptionFilters handleUserNotFound(final PeopleNotFoundException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
-                .status(NOT_FOUND.value())
-                .title("User not found!")
-                .build();
+        return new ExceptionFilters("User not found!",
+                NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now(),
+                ex.getClass().getName()
+        );
     }
 
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ExceptionFilters handleArgumentNotValid(final MethodArgumentNotValidException ex) {
-        return ExceptionFilters.builder()
-                .timestamp(LocalDateTime.now())
-                .details(ex.getMessage())
-                .devMsg(ex.getClass().getName())
-                .status(NOT_FOUND.value())
-                .title("Argument not valid")
-                .build();
+        return new ExceptionFilters("Argument not valid",
+                NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now(),
+                ex.getClass().getName()
+        );
     }
 
 }

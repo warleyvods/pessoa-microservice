@@ -7,7 +7,6 @@ plugins {
     id 'java-library'
 }
 
-
 group = 'com.example'
 version = '0.0.1'
 sourceCompatibility = '17'
@@ -62,7 +61,7 @@ tasks.named('test') {
 }
 
 bootJar {
-    archiveName = 'pessoa.jar'
+    archiveFileName = 'pessoa.jar'
 }
 
 jacoco {
