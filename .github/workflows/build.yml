@@ -45,15 +45,8 @@ jobs:
       - name: Docker Push
         run: docker push warleyvods/pessoa-m
 
-      - name: Publish package
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-        with:
-          arguments: publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-
-      - uses: paulhatch/semantic-version@v4.0.2
       - name: Semantic Versioning
+      - uses: paulhatch/semantic-version@v4.0.2
         with:
           tag_prefix: "v"
           # A string which, if present in a git commit, indicates that a change represents a
@@ -74,3 +67,12 @@ jobs:
           search_commit_body: false
           # The output method used to generate list of users, 'csv' or 'json'.
           user_format_type: "csv"
+
+      - name: Publish package
+        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        with:
+          arguments: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+
