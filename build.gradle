@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1'
+version = '0.0.2'
 sourceCompatibility = '17'
 
 configurations {
@@ -109,14 +109,14 @@ publishing {
                 password = System.getenv("GIT_TOKEN")
             }
         }
-        maven {
-            name "nexus"
-            url "https://nexus.kaizensolutions.com.br/repository/KS-Service/"
-            credentials {
-                username = System.getenv("NEXUS_LOGIN")
-                password = System.getenv("NEXUS_PASS")
-            }
-        }
+//        maven {
+//            name "nexus"
+//            url "https://nexus.kaizensolutions.com.br/repository/KS-Service/"
+//            credentials {
+//                username = System.getenv("NEXUS_LOGIN")
+//                password = System.getenv("NEXUS_PASS")
+//            }
+//        }
     }
 }
 
