@@ -19,6 +19,6 @@ public class PessoaMicroserviceApplication {
 
     @Bean
     NewTopic peopleTopic() {
-        return TopicBuilder.name("people-topic").partitions(2).replicas(3).build();
+        return TopicBuilder.name("people-topic").partitions(2).replicas(1).build();
     }
 }

@@ -1,6 +1,15 @@
 version: '3.4'
 services:
 
+  front:
+    image: warleyvods/crud-fe
+    hostname: crud-fe
+    restart: always
+    networks:
+      - microservices
+    ports:
+      - "3000:3000"
+
   nginx:
     image: warleyvods/nginx-microservices
     hostname: nginx
