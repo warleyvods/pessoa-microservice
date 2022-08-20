@@ -1,5 +1,6 @@
 package com.example.pessoamicroservice.controller;
 
+import com.example.pessoamicroservice.controller.dtos.PeoplePutRequestDTO;
 import com.example.pessoamicroservice.usecases.DeletePeopleUsecase;
 import com.example.pessoamicroservice.usecases.FindByPeopleUsecase;
 import com.example.pessoamicroservice.controller.dtos.PeopleRequestDTO;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/api/people")
 @RestController
 public class PeopleController {
+
     private final PeopleGateway peopleGateway;
     private final PeopleMapper peopleMapper;
     private final FindByPeopleUsecase findByPeopleUsecase;
@@ -28,6 +30,14 @@ public class PeopleController {
     public PeopleResponseDTO save(@RequestBody @Valid final PeopleRequestDTO peopleRequestDTO) {
         final People people = peopleGateway.save(peopleMapper.toDomain(peopleRequestDTO));
         return peopleMapper.fromDomain(people);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping
+    public PeopleResponseDTO save(@RequestBody @Valid final PeoplePutRequestDTO peoplePutRequestDTO) {
+        final People toUpdate = peopleGateway.findById(peoplePutRequestDTO.id());
+        final People people = peopleMapper.updatePeople(peoplePutRequestDTO, toUpdate);
+        return peopleMapper.fromDomain(peopleGateway.update(people));
     }
 
     @ResponseStatus(HttpStatus.OK)

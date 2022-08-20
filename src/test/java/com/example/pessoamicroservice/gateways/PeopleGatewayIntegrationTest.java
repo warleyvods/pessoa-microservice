@@ -32,7 +32,7 @@ class PeopleGatewayIntegrationTest {
     void shouldSavePeopleWhitoutError() {
         People people = new People();
         people.setCpf("03964879126");
-        people.setIdade(19);
+        people.setAge(19);
         people.setName("Warley");
 
         final People response = peopleGateway.save(people);
@@ -46,7 +46,7 @@ class PeopleGatewayIntegrationTest {
     void shouldDeleteById() {
         People people = new People();
         people.setCpf("03964879126");
-        people.setIdade(19);
+        people.setAge(19);
         people.setName("Warley");
 
         final People response = peopleGateway.save(people);
@@ -59,7 +59,7 @@ class PeopleGatewayIntegrationTest {
     void shouldFindById() {
         People people = new People();
         people.setCpf("123456789");
-        people.setIdade(19);
+        people.setAge(19);
         people.setName("Warley");
 
         final People savedPeople = peopleGateway.save(people);
@@ -79,12 +79,12 @@ class PeopleGatewayIntegrationTest {
     void shouldFindAll() {
         People people0 = new People();
         people0.setCpf("123456789");
-        people0.setIdade(19);
+        people0.setAge(19);
         people0.setName("Warley");
 
         People people1 = new People();
         people1.setCpf("123456789");
-        people1.setIdade(19);
+        people1.setAge(19);
         people1.setName("Warley");
         peopleRepository.saveAll(List.of(people0, people1));
 
@@ -93,11 +93,11 @@ class PeopleGatewayIntegrationTest {
         assertEquals(2, listPeople.size());
 
         assertEquals(people0.getCpf(), listPeople.get(0).getCpf());
-        assertEquals(people0.getIdade(), listPeople.get(0).getIdade());
+        assertEquals(people0.getAge(), listPeople.get(0).getAge());
         assertEquals(people0.getName(), listPeople.get(0).getName());
 
         assertEquals(people1.getCpf(), listPeople.get(1).getCpf());
-        assertEquals(people1.getIdade(), listPeople.get(1).getIdade());
+        assertEquals(people1.getAge(), listPeople.get(1).getAge());
         assertEquals(people1.getName(), listPeople.get(1).getName());
     }
 }

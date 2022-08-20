@@ -11,7 +11,7 @@ public record PeopleResponseDTO(
         Long id,
         String name,
         String cpf,
-        Integer idade,
+        Integer age,
         @JsonInclude(NON_NULL)
         List<AddressResponseDTO> address
 ) {

@@ -25,4 +25,9 @@ public record PeopleGateway(PeopleRepository repository) {
     public List<People> findAll() {
         return repository.findAll();
     }
+
+    public People update(final People people) {
+        return save(people);
+    }
+
 }

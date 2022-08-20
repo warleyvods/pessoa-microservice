@@ -44,7 +44,7 @@ class PeopleControllerTest {
     void shouldSavePeople() {
         People people = new People();
         people.setCpf("02312341654");
-        people.setIdade(10);
+        people.setAge(10);
         people.setName("Warley");
 
         final HttpEntity<People> request = new HttpEntity<>(people);
@@ -53,7 +53,7 @@ class PeopleControllerTest {
 
         assertEquals(201, response.getStatusCodeValue());
         assertEquals(people.getCpf(), Objects.requireNonNull(response.getBody()).cpf());
-        assertEquals(people.getIdade(), response.getBody().idade());
+        assertEquals(people.getAge(), response.getBody().age());
         assertEquals(people.getName(), response.getBody().name());
         assertNull(response.getBody().address());
     }
@@ -74,7 +74,7 @@ class PeopleControllerTest {
         People people = new People();
         people.setName(name);
         people.setCpf(cpf);
-        people.setIdade(age);
+        people.setAge(age);
 
         final HttpEntity<People> request = new HttpEntity<>(people);
 
@@ -88,7 +88,7 @@ class PeopleControllerTest {
     void shouldFindByIdWithOneAddress() {
         People people = new People();
         people.setCpf("02312341654");
-        people.setIdade(10);
+        people.setAge(10);
         people.setName("Warley");
         final Long peopleSavedId = peopleRepository.save(people).getId();
 
@@ -96,7 +96,7 @@ class PeopleControllerTest {
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(people.getCpf(), Objects.requireNonNull(response.getBody()).cpf());
-        assertEquals(people.getIdade(), response.getBody().idade());
+        assertEquals(people.getAge(), response.getBody().age());
         assertEquals(people.getName(), response.getBody().name());
         assertEquals(0, response.getBody().address().size());
     }
@@ -106,7 +106,7 @@ class PeopleControllerTest {
         People people = new People();
         people.setId(2L);
         people.setCpf("02312341654");
-        people.setIdade(10);
+        people.setAge(10);
         people.setName("Warley");
         final Long peopleSavedId = peopleRepository.save(people).getId();
 
@@ -114,7 +114,7 @@ class PeopleControllerTest {
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(people.getCpf(), Objects.requireNonNull(response.getBody()).cpf());
-        assertEquals(people.getIdade(), response.getBody().idade());
+        assertEquals(people.getAge(), response.getBody().age());
         assertEquals(people.getName(), response.getBody().name());
         assertEquals(0, response.getBody().address().size());
     }
@@ -123,7 +123,7 @@ class PeopleControllerTest {
     void shouldFindByIdWIREMOCK() {
         People people = new People();
         people.setCpf("02312341654");
-        people.setIdade(10);
+        people.setAge(10);
         people.setName("Warley");
         final Long peopleSavedId = peopleRepository.save(people).getId();
 
@@ -131,7 +131,7 @@ class PeopleControllerTest {
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(people.getCpf(), Objects.requireNonNull(response.getBody()).cpf());
-        assertEquals(people.getIdade(), response.getBody().idade());
+        assertEquals(people.getAge(), response.getBody().age());
         assertEquals(people.getName(), response.getBody().name());
         assertEquals(0, response.getBody().address().size());
     }
@@ -140,7 +140,7 @@ class PeopleControllerTest {
     void shouldDeletePeopleById() {
         People people = new People();
         people.setCpf("02312341654");
-        people.setIdade(10);
+        people.setAge(10);
         people.setName("Warley");
         final Long peopleSavedId = peopleRepository.save(people).getId();
 
@@ -153,12 +153,12 @@ class PeopleControllerTest {
     void shouldListAllPeople() {
         People people0 = new People();
         people0.setCpf("123456789");
-        people0.setIdade(19);
+        people0.setAge(19);
         people0.setName("Warley");
 
         People people1 = new People();
         people1.setCpf("123456789");
-        people1.setIdade(19);
+        people1.setAge(19);
         people1.setName("Warley");
         peopleRepository.saveAll(List.of(people0, people1));
 
@@ -167,11 +167,11 @@ class PeopleControllerTest {
         assertEquals(2, Objects.requireNonNull(listPeople.getBody()).size());
 
         assertEquals(people0.getCpf(), listPeople.getBody().get(0).cpf());
-        assertEquals(people0.getIdade(), listPeople.getBody().get(0).idade());
+        assertEquals(people0.getAge(), listPeople.getBody().get(0).age());
         assertEquals(people0.getName(), listPeople.getBody().get(0).name());
 
         assertEquals(people0.getCpf(), listPeople.getBody().get(1).cpf());
-        assertEquals(people0.getIdade(), listPeople.getBody().get(1).idade());
+        assertEquals(people0.getAge(), listPeople.getBody().get(1).age());
         assertEquals(people0.getName(), listPeople.getBody().get(1).name());
     }
 }

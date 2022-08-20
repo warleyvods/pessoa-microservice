@@ -12,14 +12,13 @@ import java.util.List;
 
 @Slf4j
 @Component
-public record FindByPeopleUsecase(PeopleGateway peopleGateway,
-                                  AddressClient addressClient) {
+public record FindByPeopleUsecase(PeopleGateway peopleGateway, AddressClient addressClient) {
 
     public PeopleResponseDTO response(Long id) {
         final People people = peopleGateway.findById(id);
         final List<AddressResponseDTO> addressFromClient = getAddressResponseDTOS(id);
 
-        return new PeopleResponseDTO(id, people.getName(), people.getCpf(), people.getIdade(), addressFromClient);
+        return new PeopleResponseDTO(id, people.getName(), people.getCpf(), people.getAge(), addressFromClient);
     }
 
     public List<AddressResponseDTO> getAddressResponseDTOS(Long id) {

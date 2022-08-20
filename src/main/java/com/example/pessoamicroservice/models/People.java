@@ -19,6 +19,6 @@ public class People {
 
     private String name;
     private String cpf;
-    private Integer idade;
+    private Integer age;
 
 }

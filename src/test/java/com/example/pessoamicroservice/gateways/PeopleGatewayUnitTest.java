@@ -30,7 +30,7 @@ class PeopleGatewayUnitTest {
     void shouldSavePeopleWhitoutError() {
         People people = new People();
         people.setCpf("03964879126");
-        people.setIdade(19);
+        people.setAge(19);
         people.setName("Warley");
 
         when(peopleRepository.save(people)).thenReturn(people);
@@ -57,7 +57,7 @@ class PeopleGatewayUnitTest {
     void shouldFindById() {
         People people = new People();
         people.setCpf("03964879126");
-        people.setIdade(19);
+        people.setAge(19);
         people.setName("Warley");
 
         when(peopleRepository.findById(anyLong())).thenReturn(Optional.of(people));
@@ -73,12 +73,12 @@ class PeopleGatewayUnitTest {
     void shouldFindAll() {
         People people0 = new People();
         people0.setCpf("123456789");
-        people0.setIdade(19);
+        people0.setAge(19);
         people0.setName("Warley");
 
         People people1 = new People();
         people1.setCpf("123456789");
-        people1.setIdade(19);
+        people1.setAge(19);
         people1.setName("Warley");
 
         when(peopleRepository.findAll()).thenReturn(List.of(people0, people1));
@@ -88,11 +88,11 @@ class PeopleGatewayUnitTest {
         assertEquals(2, listPeople.size());
 
         assertEquals(people0.getCpf(), listPeople.get(0).getCpf());
-        assertEquals(people0.getIdade(), listPeople.get(0).getIdade());
+        assertEquals(people0.getAge(), listPeople.get(0).getAge());
         assertEquals(people0.getName(), listPeople.get(0).getName());
 
         assertEquals(people1.getCpf(), listPeople.get(1).getCpf());
-        assertEquals(people1.getIdade(), listPeople.get(1).getIdade());
+        assertEquals(people1.getAge(), listPeople.get(1).getAge());
         assertEquals(people1.getName(), listPeople.get(1).getName());
     }
 }
