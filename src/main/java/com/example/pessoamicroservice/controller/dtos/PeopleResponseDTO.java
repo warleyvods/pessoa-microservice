@@ -19,5 +19,4 @@ public record PeopleResponseDTO(
     public boolean hasAddress() {
         return address != null && !address.isEmpty();
     }
-
 }

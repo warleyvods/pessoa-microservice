@@ -7,6 +7,7 @@ public record ExceptionFilters(
         Integer status,
         String details,
         LocalDateTime timestamp,
-        String devMsg) {
+        String devMsg
+) {
 
 }
